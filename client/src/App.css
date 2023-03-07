@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+.App {
+  padding: 0px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;                                            
+  justify-content: center;
+  text-align: center;
+}
+
+.navbar {
+  position: static;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  padding: 20px 36px;
+  background: rgb(191, 214, 217);
+  box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+  padding-top: 4px;
+}
+
+.navbar-title {
+  padding-left: 10px;
+}
+
+.hospitals-content {
+  margin-top: 15px;
+  position: relative;
+}
+
+.hospitals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hospitals-item {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid rgb(189, 190, 190);
+  border-radius: 35px;
+}
+
+.hospitals-details {
+  margin: 10px;
+}
+
+.add-button {
+  border: 2px solid rgb(123, 183, 188);
+  padding: 10px;
+  background-color: rgb(191, 214, 217);
+  margin-bottom: 25px;
+}
+
+.delete-button {
+  border: 1px solid rgb(250, 170, 170);
+  padding: 3px 6px;
+  background-color: white;
+  cursor: pointer;
+  color: rgb(238, 121, 121);
+  margin: 5px;
+}
+
+.edit-button {
+  border: 1px solid rgb(149, 188, 233);
+  padding: 3px 6px;
+  background-color: white;
+  cursor: pointer;
+  color: rgb(91, 189, 219);
+  margin: 5px;
+}
+
+.edit-link {
+  text-decoration: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+input {
+  width: 290px;
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+.hospital-add-dropdown {
+  height: 35px;
+  width: 290px;
+}
+
+.hospital-edit-dropdown {
+  height: 35px;
+  width: 290px;
+}
+
+.form-button {
+  border: none;
+  padding: 10px;
+  background-color: rgb(191, 214, 217);
+  width: 290px;
+}
