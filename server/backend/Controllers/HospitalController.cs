@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Entities;
+using Microsoft.AspNetCore.Cors;
 
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    // [EnableCors("Policy1")]
     public class HospitalController : ControllerBase
     {
         private readonly HospitaldbcContext _context;
@@ -21,6 +23,7 @@ namespace backend.Controllers
         }
 
         // GET: api/Hospital
+        // [EnableCors("Policy5")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hospital>>> GetHospitals()
         {
@@ -28,6 +31,7 @@ namespace backend.Controllers
         }
 
         // GET: api/Hospital/5
+        // [EnableCors("Policy4")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Hospital>> GetHospital(int id)
         {
@@ -43,6 +47,7 @@ namespace backend.Controllers
 
         // PUT: api/Hospital/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // [EnableCors("Policy3")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHospital(int id, Hospital hospital)
         {
@@ -74,6 +79,7 @@ namespace backend.Controllers
 
         // POST: api/Hospital
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // [EnableCors("Policy2")]
         [HttpPost]
         public async Task<ActionResult<Hospital>> PostHospital(Hospital hospital)
         {
@@ -84,6 +90,7 @@ namespace backend.Controllers
         }
 
         // DELETE: api/Hospital/5
+        // [EnableCors("Policy1")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHospital(int id)
         {

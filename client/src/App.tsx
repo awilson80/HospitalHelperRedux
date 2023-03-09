@@ -1,12 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar.jsx';
-import Hospitals from './components/Hospitals.jsx';
-import AddHospital from './components/AddHospital.jsx';
-import EditHospital from './components/EditHospital.jsx';
+import { Navbar } from './components/Navbar';
+import { Hospitals } from './components/Hospitals';
+import { AddHospital } from './components/AddHospital';
+import { EditHospital } from './components/EditHospital';
 
-function App() {
+export function App() {
     return (
         <div className='App'>
             <BrowserRouter>
@@ -20,5 +20,3 @@ function App() {
         </div>
     );
 }
-
-export default App;
