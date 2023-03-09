@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace backend.Entities;
 
@@ -18,8 +16,6 @@ public partial class HospitaldbcContext : DbContext
     public virtual DbSet<Hospital> Hospitals { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
-//        => optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=VV!Zh8!$;database=hospitaldbc");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Hospital>(entity =>
