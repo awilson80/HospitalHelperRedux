@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { ErrorMessage } from '@hookform/error-message';
 
-const EditHospital = () => {
+export const EditHospital = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -13,6 +14,7 @@ const EditHospital = () => {
     const hospitalId = location.pathname.split('/')[2];
 
     const [input, setInput] = useState({
+        id: '',
         name: '',
         location: '',
         type: '',
@@ -23,9 +25,9 @@ const EditHospital = () => {
         const getInputs = async () => {
             try {
                 const res = await axios.get(
-                    'http://localhost:4000/hospitals/' + hospitalId
+                    'https://localhost:7204/api/Hospital/' + hospitalId
                 );
-                setInput(res.data[0]);
+                setInput(res.data);
             } catch (err) {
                 console.log(err);
             }
@@ -34,17 +36,18 @@ const EditHospital = () => {
         getInputs();
     }, []);
 
-    const handleChange = (event) => {
+    const handleChange = (event: React.ChangeEvent) => {
+        const target = event.target as HTMLInputElement;
         setInput((prev) => ({
             ...prev,
-            [event.target.name]: event.target.value,
+            [target.name]: target.value,
         }));
     };
 
-    const sendData = async (data) => {
+    const sendData = async (data: FieldValues) => {
         try {
             await axios.put(
-                'http://localhost:4000/hospitals/' + hospitalId,
+                'https://localhost:7204/api/Hospital/' + hospitalId,
                 data
             );
             navigate('/');
@@ -55,7 +58,8 @@ const EditHospital = () => {
 
     // Validation
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: FieldValues) => {
+        data['id'] = hospitalId;
         sendData(data);
     };
 
@@ -99,33 +103,42 @@ const EditHospital = () => {
         resolver: yupResolver(schema),
     });
 
+    // Go look at documentation for Yup's fieldError
     return (
         <form className='form'>
             <h1>Edit Hospital Details</h1>
             <input
                 type='text'
                 placeholder='name'
-                onChange={handleChange}
-                name='name'
                 defaultValue={input.name}
                 {...register('name')}
+                name='name'
+                onChange={handleChange}
             />
-            {errors.name && <p>{errors.name.message}</p>}
+            <ErrorMessage 
+            errors={errors} 
+            name="name" 
+            as="p"
+            />            
             <input
                 type='text'
                 placeholder='location'
-                onChange={handleChange}
-                name='location'
                 defaultValue={input.location}
                 {...register('location')}
-            />
-            {errors.location && <p>{errors.location.message}</p>}
-            <select
+                name='location'
                 onChange={handleChange}
+            />
+            <ErrorMessage 
+            errors={errors} 
+            name="location" 
+            as="p"
+            />            
+            <select
                 className='hospital-edit-dropdown'
-                name='type'
                 defaultValue={input.type}
                 {...register('type')}
+                name='type'
+                onChange={handleChange}
             >
                 <option value='General'>General</option>
                 <option value='Pediatric'>Pediatric</option>
@@ -133,16 +146,24 @@ const EditHospital = () => {
                 <option value='Neurology'>Neurology</option>
                 <option value='Orthopedic'>Orthopedic</option>
             </select>
-            {errors.type && <p>{errors.type.message}</p>}
+            <ErrorMessage 
+            errors={errors} 
+            name="type" 
+            as="p"
+            />            
             <input
                 type='text'
                 placeholder='phone'
-                onChange={handleChange}
-                name='phone'
                 defaultValue={input.phone}
                 {...register('phone')}
+                name='phone'
+                onChange={handleChange}
             />
-            {errors.phone && <p>{errors.phone.message}</p>}
+            <ErrorMessage 
+            errors={errors} 
+            name="phone" 
+            as="p"
+            />            
             <button
                 type='submit'
                 className='form-button'
@@ -153,5 +174,3 @@ const EditHospital = () => {
         </form>
     );
 };
-
-export default EditHospital;

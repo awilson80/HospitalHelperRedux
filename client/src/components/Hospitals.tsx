@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Hospitals = () => {
-    const [hospitals, setHospitals] = useState([]);
+export const Hospitals = () => {
+    const [hospitals, setHospitals] = useState<any[]>([]);
 
     useEffect(() => {
         const getHospitals = async () => {
             try {
                 const response = await axios.get(
-                    'http://localhost:4000/hospitals'
+                    'http://localhost:5118/api/Hospital'
                 );
                 setHospitals(response.data);
             } catch (err) {
@@ -20,9 +20,9 @@ const Hospitals = () => {
         getHospitals();
     }, []);
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id: Number) => {
         try {
-            await axios.delete('http://localhost:4000/hospitals/' + id);
+            await axios.delete('http://localhost:5118/api/Hospital/' + id);
             window.location.reload();
         } catch (err) {
             console.log(err);
@@ -65,5 +65,3 @@ const Hospitals = () => {
         </div>
     );
 };
-
-export default Hospitals;
