@@ -14,6 +14,7 @@ export const EditHospital = () => {
     const hospitalId = location.pathname.split('/')[2];
 
     const [input, setInput] = useState({
+        id: '',
         name: '',
         location: '',
         type: '',
@@ -24,9 +25,9 @@ export const EditHospital = () => {
         const getInputs = async () => {
             try {
                 const res = await axios.get(
-                    'http://localhost:5118/api/Hospital' + hospitalId
+                    'https://localhost:7204/api/Hospital/' + hospitalId
                 );
-                setInput(res.data[0]);
+                setInput(res.data);
             } catch (err) {
                 console.log(err);
             }
@@ -46,7 +47,7 @@ export const EditHospital = () => {
     const sendData = async (data: FieldValues) => {
         try {
             await axios.put(
-                'http://localhost:5118/api/Hospital' + hospitalId,
+                'https://localhost:7204/api/Hospital/' + hospitalId,
                 data
             );
             navigate('/');
@@ -58,6 +59,7 @@ export const EditHospital = () => {
     // Validation
 
     const onSubmit = (data: FieldValues) => {
+        data['id'] = hospitalId;
         sendData(data);
     };
 
@@ -165,7 +167,7 @@ export const EditHospital = () => {
             <button
                 type='submit'
                 className='form-button'
-                onClick={() => handleSubmit(onSubmit)}
+                onClick={handleSubmit(onSubmit)}
             >
                 Save
             </button>

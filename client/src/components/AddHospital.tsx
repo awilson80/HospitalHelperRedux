@@ -25,7 +25,7 @@ export const AddHospital = () => {
 
     const sendData = async (data: FieldValues) => {
         try {
-            await axios.post('https://localhost:5118/api/Hospital', data);
+            await axios.post('https://localhost:7204/api/Hospital', data);
             navigate('/');
         } catch (err) {
             console.log('Unable to process new addition.');
